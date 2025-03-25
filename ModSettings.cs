@@ -2,6 +2,7 @@
 using Game.Input;
 using Game.Modding;
 using Game.Settings;
+using Game.UI.Menu;
 using System.Linq;
 using System;
 using System.Reflection;
@@ -30,16 +31,27 @@ namespace Mod
         public const string gToolRelated                = "Tool related";
         public const string gAbout                      = "About";
 
+        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadSimpleCurve))]
+        [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
+        [SettingsUIMultilineText("coui://kelvinspaces-hotkey/Assets/Icons/Straight.svg")]
+        public string Xyz => string.Empty;
+
+        [UIAttributes.CustomUIExtendedKeybinding("coui://kelvinspaces-hotkey/Assets/Icons/Straight.svg", BindingKeyboard.Q, "ButtonBinding", shift: true)]
+        [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
+        public string Abc => string.Empty;
+
+        [UIAttributes.CustomUIExtendedKeybinding("coui://kelvinspaces-hotkey/Assets/Icons/Straight.svg", BindingKeyboard.Q, "ButtonBinding", shift: true)]
+        [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
+        public ProxyBinding KeyboardBinding { get; set; }
 
         //[SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadStraight))]
-        [UIAttributes.CustomUIExtendedKeybinding("coui://ui-mods/Icons/Straight.svg", BindingKeyboard.None, "ButtonBinding")]
+        [UIAttributes.CustomUIExtendedKeybinding("coui://kelvinspaces-hotkey/Assets/Icons/Straight.svg", BindingKeyboard.None, "ButtonBinding")]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
         public ProxyBinding RoadStraight { get; set; }
 
         // Simple curve for net tools or marquee for zone tools
         [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadSimpleCurve))]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
-        [SettingsUIMultilineText("coui://Hotkey/Assets/Icons/Straight.svg")]
         public ProxyBinding RoadSimpleCurve { get; set; }
 
         // Complex curve for net tools or paint for zone tools

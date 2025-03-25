@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Input;
 using Game.Settings;
+using Mod.Models.Tools;
 
 namespace Mod.Models.Ui;
 
@@ -21,6 +22,10 @@ namespace Mod.Models.Ui;
             : base(defaultKey, actionName, alt, ctrl, shift)
         {
             this.icon = icon;
+
+            Hotkey.Logger.Info(icon + " " + defaultKey + " " + actionName);
         }
+
+        
     }
 }

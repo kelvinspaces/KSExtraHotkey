@@ -17,6 +17,7 @@ namespace Mod
     {
         public static ModSettings ModSettings;
         private LocalizationManager LocalizationManager => GameManager.instance.localizationManager;
+        private string modPath;
 
         public static ILog Logger = LogManager.GetLogger("Kelvinspaces.Hotkey").SetShowsErrorsInUI(false);
 
@@ -25,7 +26,11 @@ namespace Mod
             Logger.Info(nameof(OnLoad));
 
             if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset))
-                Logger.Info($"Current mod asset at {asset.path}");
+            {
+                modPath = Path.GetDirectoryName(asset.path);
+                Logger.Info($"Current mod asset at {modPath}");
+            }
+                
 
             Localization.LoadLocalization(Assembly.GetExecutingAssembly());
 
