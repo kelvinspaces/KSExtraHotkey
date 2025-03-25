@@ -15,21 +15,21 @@ namespace Mod
     [SettingsUIShowGroupName(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZoneToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
 
 
-    public class ModSettings(IMod mod) : ModSetting(mod)
+    public partial class ModSettings(IMod mod) : ModSetting(mod)
     {
         // Section names
-        public const string sToolKeybindings            = "Tool Keybindings";
-        public const string sGeneral                    = "General";
+        public const string sToolKeybindings = "Tool Keybindings";
+        public const string sGeneral = "General";
 
         // Group names
-        public const string gOpenToolsKeybindings       = "Open tools";
-        public const string gRoadToolModeKeybindings    = "Tool modes (Road)";
-        public const string gZoneToolModeKeybindings    = "Tool modes (Zones)";
-        public const string gSnappingKeybindings        = "Snapping options";
-        
-        public const string gGeneral                    = "General";
-        public const string gToolRelated                = "Tool related";
-        public const string gAbout                      = "About";
+        public const string gOpenToolsKeybindings = "Open tools";
+        public const string gRoadToolModeKeybindings = "Tool modes (Road)";
+        public const string gZoneToolModeKeybindings = "Tool modes (Zones)";
+        public const string gSnappingKeybindings = "Snapping options";
+
+        public const string gGeneral = "General";
+        public const string gToolRelated = "Tool related";
+        public const string gAbout = "About";
 
         [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadSimpleCurve))]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
@@ -189,16 +189,21 @@ namespace Mod
         [SettingsUISection(sGeneral, gAbout)]
         public string ModVersion => $"V{Assembly.GetExecutingAssembly().GetName().Version.ToString(3)}";
 
+        public override AutomaticSettings.SettingPageData GetPageData(string pageId, bool addPrefix)
+        {
+            return GeneratePage(pageId, addPrefix);
+        }
+
         public override void SetDefaults()
         {
             try
             {
-                EnableMod                   = true;
-                EnableElevationScroll       = false;
-                EnableElevationStepScroll   = false;
-                EnableResetElevation        = false;
-                EnableBrushSizeScroll       = false;
-                EnableBrushStrengthScroll   = false;
+                EnableMod = true;
+                EnableElevationScroll = false;
+                EnableElevationStepScroll = false;
+                EnableResetElevation = false;
+                EnableBrushSizeScroll = false;
+                EnableBrushStrengthScroll = false;
 
                 var properties = GetType().GetProperties()
                     .Where(p => p.PropertyType == typeof(ProxyBinding));
