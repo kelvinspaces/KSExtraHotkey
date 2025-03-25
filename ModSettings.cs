@@ -4,42 +4,42 @@ using Game.Modding;
 using Game.Settings;
 using System.Linq;
 using System;
+using System.Reflection;
+using Mod.Models.Ui;
 
-namespace KSExtraHotkeys
+namespace Mod
 {
-    [FileLocation(nameof(ExtraHotkeys))]
+    [FileLocation(nameof(Mod))]
     [SettingsUIGroupOrder(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZoneToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
     [SettingsUIShowGroupName(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZoneToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
 
 
-    public class ModSettings : ModSetting
+    public class ModSettings(IMod mod) : ModSetting(mod)
     {
         // Section names
-        public const string sToolKeybindings = "Tool Keybindings";
-        public const string sGeneral = "General";
+        public const string sToolKeybindings            = "Tool Keybindings";
+        public const string sGeneral                    = "General";
 
         // Group names
-        public const string gOpenToolsKeybindings = "Open tools";
-        public const string gRoadToolModeKeybindings = "Tool modes (Road)";
-        public const string gZoneToolModeKeybindings = "Tool modes (Zones)";
-        public const string gSnappingKeybindings = "Snapping options";
+        public const string gOpenToolsKeybindings       = "Open tools";
+        public const string gRoadToolModeKeybindings    = "Tool modes (Road)";
+        public const string gZoneToolModeKeybindings    = "Tool modes (Zones)";
+        public const string gSnappingKeybindings        = "Snapping options";
         
-        public const string gGeneral = "General";
-        public const string gToolRelated = "Tool related";
-        public const string gAbout = "About";
-
-        public ModSettings(IMod mod) : base(mod) { }
+        public const string gGeneral                    = "General";
+        public const string gToolRelated                = "Tool related";
+        public const string gAbout                      = "About";
 
 
-        // Tool mode keybindings
-        // Straight for net tools or fill for zone tools
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadStraight))]
+        //[SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadStraight))]
+        [UIAttributes.CustomUIExtendedKeybinding("coui://ui-mods/Icons/Straight.svg", BindingKeyboard.None, "ButtonBinding")]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
         public ProxyBinding RoadStraight { get; set; }
 
         // Simple curve for net tools or marquee for zone tools
         [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadSimpleCurve))]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
+        [SettingsUIMultilineText("coui://Hotkey/Assets/Icons/Straight.svg")]
         public ProxyBinding RoadSimpleCurve { get; set; }
 
         // Complex curve for net tools or paint for zone tools
@@ -50,6 +50,7 @@ namespace KSExtraHotkeys
         // Continuous 
         [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadContinuous))]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
+        [SettingsUIMultilineText("TEST 2")]
         public ProxyBinding RoadContinuous { get; set; }
 
         // Grid
@@ -81,12 +82,12 @@ namespace KSExtraHotkeys
 
 
         // Snapping options
-        // Snap to exising geometry
+        // Snap to existing geometry
         [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(SnapToExistingGeometryKeyBinding))]
         [SettingsUISection(sToolKeybindings, gSnappingKeybindings)]
         public ProxyBinding SnapToExistingGeometryKeyBinding { get; set; }
 
-        // Snap to zoning cell lenght
+        // Snap to zoning cell length
         [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(SnapToCellLengthKeyBinding))]
         [SettingsUISection(sToolKeybindings, gSnappingKeybindings)]
         public ProxyBinding SnapToCellLengthKeyBinding { get; set; }
@@ -134,11 +135,12 @@ namespace KSExtraHotkeys
 
         // Reset key bindings
         [SettingsUISection(sGeneral, gGeneral)]
+        [SettingsUIConfirmation()]
         public bool ResetBindings
         {
             set
             {
-                LogUtil.Info("Reset key bindings");
+                Hotkey.Logger.Info("Reset key bindings");
                 ResetKeyBindings();
             }
         }
@@ -161,11 +163,11 @@ namespace KSExtraHotkeys
         [SettingsUIHidden]
         public ProxyBinding ResetElevation { get; set; }
 
-        // Enable brush size scroll (Crtl + scroll wheel)
+        // Enable brush size scroll (Ctrl + scroll wheel)
         [SettingsUISection(sGeneral, gToolRelated)]
         public bool EnableBrushSizeScroll { get; set; } = false;
 
-        // Enable brush strengh scroll (Alt + scroll wheel)
+        // Enable brush strength scroll (Alt + scroll wheel)
         [SettingsUISection(sGeneral, gToolRelated)]
         public bool EnableBrushStrengthScroll { get; set; } = false;
 
@@ -173,20 +175,19 @@ namespace KSExtraHotkeys
 
         // About mod
         [SettingsUISection(sGeneral, gAbout)]
-        public string ModVersion { get { return $"V{ModAssemblyInfo.Version}"; } }
+        public string ModVersion => $"V{Assembly.GetExecutingAssembly().GetName().Version.ToString(3)}";
 
         public override void SetDefaults()
         {
             try
             {
-                EnableMod = true;
-                EnableElevationScroll = false;
-                EnableElevationStepScroll = false;
-                EnableResetElevation = false;
-                EnableBrushSizeScroll = false;
-                EnableBrushStrengthScroll = false;
+                EnableMod                   = true;
+                EnableElevationScroll       = false;
+                EnableElevationStepScroll   = false;
+                EnableResetElevation        = false;
+                EnableBrushSizeScroll       = false;
+                EnableBrushStrengthScroll   = false;
 
-                // Alle Keybindings auf None setzen
                 var properties = GetType().GetProperties()
                     .Where(p => p.PropertyType == typeof(ProxyBinding));
 
@@ -197,7 +198,7 @@ namespace KSExtraHotkeys
             }
             catch (Exception ex)
             {
-                LogUtil.Error($"Error in SetDefaults: {ex.Message}");
+                Hotkey.Logger.Error(ex.Message);
             }
         }
     }

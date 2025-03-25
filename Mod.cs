@@ -1,49 +1,59 @@
 ﻿using Colossal.IO.AssetDatabase;
 using Colossal.Localization;
+using Colossal.Logging;
 using Game;
 using Game.Modding;
 using Game.SceneFlow;
+using Mod.Debugger;
+using Mod.Models.Localization;
+using System.Reflection;
+using Mod.UiSystem;
+using System.IO;
+using Mod.Models.Extension;
 
-namespace KSExtraHotkeys
+namespace Mod
 {
-    public class Mod : IMod
+    public class Hotkey : IMod
     {
         public static ModSettings ModSettings;
         private LocalizationManager LocalizationManager => GameManager.instance.localizationManager;
 
-        public void OnLoad(UpdateSystem updateSystem)
+        public static ILog Logger = LogManager.GetLogger("Kelvinspaces.Hotkey").SetShowsErrorsInUI(false);
+
+		public void OnLoad(UpdateSystem updateSystem)
         {
-            LogUtil.Info(nameof(OnLoad));
+            Logger.Info(nameof(OnLoad));
 
             if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset))
-                LogUtil.Info($"Current mod asset at {asset.path}");
+                Logger.Info($"Current mod asset at {asset.path}");
 
-            ModSettings = new ModSettings(this);
+            Localization.LoadLocalization(Assembly.GetExecutingAssembly());
+
+			FileInfo fileInfo = new(asset.path);
+			Icons.LoadIconsFolder(Icons.IconsResourceKey, fileInfo.Directory.FullName);
+
+			ModSettings = new ModSettings(this);
             ModSettings.RegisterInOptionsUI();
             ModSettings.RegisterKeyBindings();
-            AssetDatabase.global.LoadSettings(nameof(KSExtraHotkeys), ModSettings, new ModSettings(this));
+            AssetDatabase.global.LoadSettings(nameof(Mod), ModSettings, new ModSettings(this));
             ModSettings.ApplyAndSave();
-
-            AddLocalizations();
 
             updateSystem.UpdateAt<UISystem>(SystemUpdatePhase.UIUpdate);
         }
 
         public void OnDispose()
         {
-            LogUtil.Info($"{nameof(Mod)}.{nameof(OnDispose)}");
+            Logger.Info($"{nameof(Hotkey)}.{nameof(OnDispose)}");
 
             if (ModSettings != null)
             {
                 ModSettings.UnregisterInOptionsUI();
                 ModSettings = null;
             }
-        }
-
-        public void AddLocalizations()
-        {
-            LocalizationManager.AddSource("en-US", new LocaleEN(ModSettings));
-            // TODO: Add more languages
+            else
+            {
+                Logger.Info($"ModSettings is NULL");
+            }
         }
     }
 }

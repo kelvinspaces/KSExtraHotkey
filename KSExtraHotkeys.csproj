@@ -2,23 +2,30 @@
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFramework>net481</TargetFramework>
 		<TargetFramework>net472</TargetFramework>
-		<LangVersion>9.0</LangVersion>
+		<LangVersion>latest</LangVersion>
 		<Configurations>Debug;Release</Configurations>
 
-		<!--The file where mod information which is required for publishing mod on PDX mods are stored-->
 		<PublishConfigurationPath>Properties\PublishConfiguration.xml</PublishConfigurationPath>
 		<Title>KS Extra Hotkeys</Title>
-		<Version>2.0.0</Version>
+		<Version>2.0.1</Version>
+		<AssemblyVersion>2.0.1</AssemblyVersion>
 		<Description>This mod adds extra hotkeys to the game that should have been there by default.</Description>
 		<Copyright>Copyright © 2025</Copyright>
 		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<CustomManagedPath>C:\Program Files (x86)\Steam\steamapps\common\Cities Skylines II\Cities2_Data\Managed</CustomManagedPath>
 	</PropertyGroup>
 
-	<!--Imports must be after PropertyGroup block-->
 	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.props" />
 	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.targets" />
+
+	<Target Name="BuildUI" AfterTargets="AfterBuild">
+		<Exec Command="npm run build" WorkingDirectory="$(ProjectDir)/Ui" />
+	</Target>
+
+	<ItemGroup>
+		<!--<Reference Include="$(CustomManagedPath)\Newtonsoft.Json.dll" Private="False" />-->
+	</ItemGroup>
 
 	<ItemGroup>
 		<Reference Include="Game">
@@ -89,10 +96,31 @@
 	  <Folder Include="Properties\Screenshots\" />
 	</ItemGroup>
 
-	<!--<Target Name="GetAdditionalFiles" AfterTargets="DeployWIP">
+	<ItemGroup>
+		<EmbeddedResource Include="Localization\*.*" />
+	</ItemGroup>
+	
+	<ProjectExtensions><VisualStudio><UserProperties localization_4en-us_1json__JsonSchema="https://alec016.github.io/Custom-Machinery/Json%20Schema/src/main/resources/schemas/custom_machinery_recipe.json" /></VisualStudio></ProjectExtensions>
+
+	<Target Name="GetAdditionalFiles" AfterTargets="DeployWIP">
 		<ItemGroup>
-			<AdditionalFilesToDeploy Include="Assets\**\*.*" />
+			<AdditionalFilesToDeploy Include="Assets\Icons\*.*" />
 		</ItemGroup>
-		<Copy SourceFiles="@(AdditionalFilesToDeploy)" DestinationFiles="@(AdditionalFilesToDeploy->'$(DeployDir)\%(AdditionalFilesDirectory)\%(RecursiveDir)%(Filename)%(Extension)')" />
-	</Target>-->
+		<Copy SourceFiles="@(AdditionalFilesToDeploy)" DestinationFiles="@(AdditionalFilesToDeploy->'$(DeployDir)\Assets\Icons\%(RecursiveDir)%(Filename)%(Extension)')" />
+	</Target>
+
+	<ItemGroup>
+		<Compile Remove="Models\Ui\**" />
+		<Compile Remove="_ReSharper.Caches\**" />
+		<EmbeddedResource Remove="Models\Ui\**" />
+		<EmbeddedResource Remove="_ReSharper.Caches\**" />
+		<None Remove="Models\Ui\**" />
+		<None Remove="_ReSharper.Caches\**" />
+		<None Remove=".gitattributes" />
+		<None Remove=".gitignore" />
+		<None Remove="ExtraHotkeys.sln.DotSettings" />
+		<None Remove="KSExtraHotkeys.csproj.DotSettings" />
+		<None Remove="LICENSE" />
+		<None Remove="README.md" />
+	</ItemGroup>
 </Project>
