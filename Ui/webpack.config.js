@@ -89,7 +89,7 @@ module.exports = {
     library: {
       type: "module",
     },
-    publicPath: `coui://ui-mods/`,
+    publicPath: `coui://kelvinspaces-hotkey/`,
   },
   optimization: {
     minimize: true,

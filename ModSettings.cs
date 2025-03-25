@@ -31,15 +31,6 @@ namespace Mod
         public const string gToolRelated = "Tool related";
         public const string gAbout = "About";
 
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadSimpleCurve))]
-        [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
-        [SettingsUIMultilineText("coui://kelvinspaces-hotkey/Assets/Icons/Straight.svg")]
-        public string Xyz => string.Empty;
-
-        [UIAttributes.CustomUIExtendedKeybinding("coui://kelvinspaces-hotkey/Assets/Icons/Straight.svg", BindingKeyboard.Q, "ButtonBinding", shift: true)]
-        [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
-        public string Abc => string.Empty;
-
         [UIAttributes.CustomUIExtendedKeybinding("coui://kelvinspaces-hotkey/Assets/Icons/Straight.svg", BindingKeyboard.Q, "ButtonBinding", shift: true)]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
         public ProxyBinding KeyboardBinding { get; set; }
