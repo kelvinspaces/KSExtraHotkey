@@ -9,10 +9,6 @@ using Game.UI.Widgets;
 namespace Mod.CustomOptionUIWidgets;
 public static class Widgets
 {
-
-    /// <summary>
-    /// Vanilla Input binding field widget extended with icon path
-    /// </summary>
     public class ExtendedKeybindingField : InputBindingField
     {
         private string m_Icon;
@@ -20,7 +16,9 @@ public static class Widgets
         public ExtendedKeybindingField(string icon, AutomaticSettings.SettingItemData itemData) : base()
         {
             m_Icon = icon;
-            /* Vanilla start */
+
+            #region Vanilla
+
             path = (PathSegment)itemData.path;
             displayName = itemData.displayName;
             description = itemData.description;
@@ -51,7 +49,8 @@ public static class Widgets
             valueVersion = itemData.valueVersionAction ?? new Func<int>(GetValueVersion);
             disabled = itemData.disableAction;
             hidden = itemData.hideAction;
-            /* Vanilla stop */
+
+            #endregion
         }
 
         static int GetValueVersion()
@@ -66,4 +65,5 @@ public static class Widgets
             writer.Write(m_Icon);
         }
     }
+
 }

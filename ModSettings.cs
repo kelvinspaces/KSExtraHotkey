@@ -7,178 +7,183 @@ using System.Linq;
 using System;
 using System.Reflection;
 using Mod.Models.Ui;
+using Mod.Constants;
 
 namespace Mod
 {
     [FileLocation(nameof(Mod))]
-    [SettingsUIGroupOrder(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZoneToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
-    [SettingsUIShowGroupName(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZoneToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
-
+    [SettingsUIGroupOrder(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZonesToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
+    [SettingsUIShowGroupName(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZonesToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
 
     public partial class ModSettings(IMod mod) : ModSetting(mod)
     {
-        // Section names
-        public const string sToolKeybindings = "Tool Keybindings";
-        public const string sGeneral = "General";
+        #region Sections
 
-        // Group names
-        public const string gOpenToolsKeybindings = "Open tools";
-        public const string gRoadToolModeKeybindings = "Tool modes (Road)";
-        public const string gZoneToolModeKeybindings = "Tool modes (Zones)";
-        public const string gSnappingKeybindings = "Snapping options";
+        public const string sToolKeybindings            = "ToolKeybindings";
+        public const string sGeneral                    = "General";
 
-        public const string gGeneral = "General";
-        public const string gToolRelated = "Tool related";
-        public const string gAbout = "About";
+        #endregion
 
-        [UIAttributes.CustomUIExtendedKeybinding("coui://kelvinspaces-hotkey/Assets/Icons/Straight.svg", BindingKeyboard.Q, "ButtonBinding", shift: true)]
-        [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
-        public ProxyBinding KeyboardBinding { get; set; }
+        #region Group Names
 
-        //[SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadStraight))]
-        [UIAttributes.CustomUIExtendedKeybinding("coui://kelvinspaces-hotkey/Assets/Icons/Straight.svg", BindingKeyboard.None, "ButtonBinding")]
+        public const string gOpenToolsKeybindings       = "OpenTools";
+        public const string gRoadToolModeKeybindings    = "ToolModesRoads";
+        public const string gZonesToolModeKeybindings   = "ToolModesZones";
+        public const string gSnappingKeybindings        = "SnappingOptions";
+
+        public const string gGeneral                    = "General";
+        public const string gToolRelated                = "ToolRelated";
+        public const string gAbout                      = "About";
+
+        #endregion
+
+        #region Road Tool Mode
+
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.RoadStraight, BindingKeyboard.None, RoadToolActions.RoadToolStraight)]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
         public ProxyBinding RoadStraight { get; set; }
 
-        // Simple curve for net tools or marquee for zone tools
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadSimpleCurve))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.RoadSimpleCurve, BindingKeyboard.None, RoadToolActions.RoadToolSimpleCurve)]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
         public ProxyBinding RoadSimpleCurve { get; set; }
 
-        // Complex curve for net tools or paint for zone tools
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadComplexCurve))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.RoadComplexCurve, BindingKeyboard.None, RoadToolActions.RoadToolComplexCurve)]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
         public ProxyBinding RoadComplexCurve { get; set; }
 
-        // Continuous 
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadContinuous))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.RoadContinuous, BindingKeyboard.None, RoadToolActions.RoadToolContinuous)]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
-        [SettingsUIMultilineText("TEST 2")]
         public ProxyBinding RoadContinuous { get; set; }
 
-        // Grid
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadGrid))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.RoadGrid, BindingKeyboard.None, RoadToolActions.RoadToolGrid)]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
         public ProxyBinding RoadGrid { get; set; }
 
-        // Replace
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(RoadReplace))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.RoadReplace, BindingKeyboard.None, RoadToolActions.RoadToolReplace)]
         [SettingsUISection(sToolKeybindings, gRoadToolModeKeybindings)]
         public ProxyBinding RoadReplace { get; set; }
 
+        #endregion
 
-        // Zone mode keybindings
-        // Fill for zone tools
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(ZoneFill))]
-        [SettingsUISection(sToolKeybindings, gZoneToolModeKeybindings)]
+        #region Zone Tool Mode
+
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.ZoneFill, BindingKeyboard.None, ZoneToolActions.ZoneToolFill)]
+        [SettingsUISection(sToolKeybindings, gZonesToolModeKeybindings)]
         public ProxyBinding ZoneFill { get; set; }
 
-        // Marquee for zone tools
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(ZoneMarquee))]
-        [SettingsUISection(sToolKeybindings, gZoneToolModeKeybindings)]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.ZoneMarquee, BindingKeyboard.None, ZoneToolActions.ZoneToolMarquee)]
+        [SettingsUISection(sToolKeybindings, gZonesToolModeKeybindings)]
         public ProxyBinding ZoneMarquee { get; set; }
 
-        // Paint for zone tools
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(ZonePaint))]
-        [SettingsUISection(sToolKeybindings, gZoneToolModeKeybindings)]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.ZonePaint, BindingKeyboard.None, ZoneToolActions.ZoneToolPaint)]
+        [SettingsUISection(sToolKeybindings, gZonesToolModeKeybindings)]
         public ProxyBinding ZonePaint { get; set; }
 
+        #endregion
 
-        // Snapping options
-        // Snap to existing geometry
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(SnapToExistingGeometryKeyBinding))]
+        #region Snapping Tools
+
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.SnappingExistingGeometry, BindingKeyboard.None, SnappingActions.ExistingGeometry)]
         [SettingsUISection(sToolKeybindings, gSnappingKeybindings)]
         public ProxyBinding SnapToExistingGeometryKeyBinding { get; set; }
 
-        // Snap to zoning cell length
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(SnapToCellLengthKeyBinding))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.SnappingCellLength, BindingKeyboard.None, SnappingActions.CellLength)]
         [SettingsUISection(sToolKeybindings, gSnappingKeybindings)]
         public ProxyBinding SnapToCellLengthKeyBinding { get; set; }
 
-        // Snap to 90 degree angles
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(SnapTo90DegreeAnglesKeyBinding))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.SnappingStraightDirection, BindingKeyboard.None, SnappingActions.StraightDirection)]
         [SettingsUISection(sToolKeybindings, gSnappingKeybindings)]
         public ProxyBinding SnapTo90DegreeAnglesKeyBinding { get; set; }
 
-        // Snap to sides of a building
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(SnapToBuildingSidesKeyBinding))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.SnappingObjectSide, BindingKeyboard.None, SnappingActions.BuildingSides)]
         [SettingsUISection(sToolKeybindings, gSnappingKeybindings)]
         public ProxyBinding SnapToBuildingSidesKeyBinding { get; set; }
 
-        // Snap to guidelines
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(SnapToGuidelinesKeyBinding))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.SnappingGuideLines, BindingKeyboard.None, SnappingActions.Guidelines)]
         [SettingsUISection(sToolKeybindings, gSnappingKeybindings)]
         public ProxyBinding SnapToGuidelinesKeyBinding { get; set; }
 
-        // Snap to nearby geometry
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(SnapToNearbyGeometryKeyBinding))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.SnappingNearbyGeometry, BindingKeyboard.None, SnappingActions.NearbyGeometry)]
         [SettingsUISection(sToolKeybindings, gSnappingKeybindings)]
         public ProxyBinding SnapToNearbyGeometryKeyBinding { get; set; }
 
-        // Snap to zone grid
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(SnapToZoneGridKeyBinding))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.SnappingZoneGrid, BindingKeyboard.None, SnappingActions.ZoneGrid)]
         [SettingsUISection(sToolKeybindings, gSnappingKeybindings)]
         public ProxyBinding SnapToZoneGridKeyBinding { get; set; }
 
-        // Snap to the sides of a road
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(SnapToRoadSidesKeyBinding))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.SnappingNetSide, BindingKeyboard.None, SnappingActions.RoadSides)]
         [SettingsUISection(sToolKeybindings, gSnappingKeybindings)]
         public ProxyBinding SnapToRoadSidesKeyBinding { get; set; }
 
-        // Show contour lines
-        [SettingsUIKeyboardBinding(BindingKeyboard.None, nameof(ShowContourLinesKeyBinding))]
+        [UIAttributes.CustomUIExtendedKeybinding(IconPath.ShowContourLines, BindingKeyboard.None, SnappingActions.ShowContourLines)]
         [SettingsUISection(sToolKeybindings, gSnappingKeybindings)]
         public ProxyBinding ShowContourLinesKeyBinding { get; set; }
 
+        #endregion
 
-        // General settings
-        // Enable mod
+        #region Generals
+
         [SettingsUISection(sGeneral, gGeneral)]
         public bool EnableMod { get; set; } = true;
 
-        // Reset key bindings
         [SettingsUISection(sGeneral, gGeneral)]
         [SettingsUIConfirmation()]
         public bool ResetBindings
         {
             set
             {
-                Hotkey.Logger.Info("Reset key bindings");
+                Hotkey.Logger.Info("ResetKey");
                 ResetKeyBindings();
             }
         }
 
-        // Tool related settings
-        // Enable elevation scroll (Ctrl + scroll wheel)
-        [SettingsUISection(sGeneral, gToolRelated)]
-        public bool EnableElevationScroll { get; set; } = false;
+        #endregion
 
-        // Enable elevation steps (Alt + scroll wheel)
-        [SettingsUISection(sGeneral, gToolRelated)]
-        public bool EnableElevationStepScroll { get; set; } = false;
+        #region Brush & Evevation
 
-        // Enable reset elevation (Alt + right click)
         [SettingsUISection(sGeneral, gToolRelated)]
-        public bool EnableResetElevation { get; set; } = false;
+        public bool EnableElevationScroll { get; set; }
 
-        // Hidden elevation scroll key bindings
+        [SettingsUISection(sGeneral, gToolRelated)]
+        public bool EnableElevationStepScroll { get; set; }
+
+        [SettingsUISection(sGeneral, gToolRelated)]
+        public bool EnableResetElevation { get; set; }
+
         [SettingsUIMouseBinding(BindingMouse.Right, nameof(ResetElevation), ctrl: true)]
         [SettingsUIHidden]
         public ProxyBinding ResetElevation { get; set; }
 
-        // Enable brush size scroll (Ctrl + scroll wheel)
         [SettingsUISection(sGeneral, gToolRelated)]
-        public bool EnableBrushSizeScroll { get; set; } = false;
+        public bool EnableBrushSizeScroll { get; set; }
 
-        // Enable brush strength scroll (Alt + scroll wheel)
         [SettingsUISection(sGeneral, gToolRelated)]
-        public bool EnableBrushStrengthScroll { get; set; } = false;
+        public bool EnableBrushStrengthScroll { get; set; }
 
+        #endregion
 
+        #region About
 
-        // About mod
         [SettingsUISection(sGeneral, gAbout)]
         public string ModVersion => $"V{Assembly.GetExecutingAssembly().GetName().Version.ToString(3)}";
+
+        [SettingsUISection(sGeneral, gAbout)]
+        [SettingsUIButton]
+        public bool DiscordLink
+        {
+            set => OpenDiscord();
+        }
+
+        [SettingsUISection(sGeneral, gAbout)]
+        [SettingsUIButton]
+        public bool QQLink
+        {
+            set => OpenQQ();
+        }
+
+        #endregion
+
+        #region Methods
 
         public override AutomaticSettings.SettingPageData GetPageData(string pageId, bool addPrefix)
         {
@@ -209,5 +214,33 @@ namespace Mod
                 Hotkey.Logger.Error(ex.Message);
             }
         }
+
+        public void OpenDiscord()
+        {
+            try
+            {
+                string discordInviteLink = "https://discord.com/channels/1024242828114673724/1352829725617426514";
+                System.Diagnostics.Process.Start(discordInviteLink);
+            }
+            catch (Exception ex)
+            {
+                Hotkey.Logger.Info("An error occurred: " + ex.Message);
+            }
+        }
+
+        public void OpenQQ()
+        {
+            try
+            {
+                string qqInviteLink = "https://qm.qq.com/q/JYBKZg9NYs";
+                System.Diagnostics.Process.Start(qqInviteLink);
+            }
+            catch (Exception ex)
+            {
+                Hotkey.Logger.Info("An error occurred: " + ex.Message);
+            }
+        }
+
+        #endregion
     }
 }

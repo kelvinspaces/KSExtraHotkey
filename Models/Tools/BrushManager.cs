@@ -9,7 +9,7 @@ namespace Mod.Models.Tools;
 public class BrushManager
 {
     private const float MIN_BRUSH_SIZE = 1f;
-    private const float MAX_BRUSH_SIZE = 1000f;
+    private const float MAX_BRUSH_SIZE = 50000f;
     private const float MIN_BRUSH_STRENGTH = 0.01f;
     private const float MAX_BRUSH_STRENGTH = 1.00f;
 
@@ -78,9 +78,11 @@ public class BrushManager
 
     private float GetBrushSizeIncrement(float currentSize)
     {
+        if (currentSize < 10) return 1f;
         if (currentSize < 100) return 10f;
         if (currentSize < 500) return 50f;
-        return 100f;
+        if (currentSize < 1000) return 100f;
+        return 1000f;
     }
 
     private void IncreaseBrushStrength()

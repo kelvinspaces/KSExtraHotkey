@@ -4,8 +4,8 @@
   "Options.TAB[KSExtraHotkeys.Mod.Hotkey.General]": "其他",
   "Options.TAB[KSExtraHotkeys.Mod.Hotkey.Tool Keybindings]": "遊戲玩法",
   "Options.GROUP[KSExtraHotkeys.Mod.Hotkey.Open tools]": "開啟工具視窗",
-  "Options.GROUP[KSExtraHotkeys.Mod.Hotkey.Tool modes (Road)]": "工具模式 (道路)",
-  "Options.GROUP[KSExtraHotkeys.Mod.Hotkey.Tool modes (Zones)]": "工具模式 (功能區)",
+  "Options.GROUP[KSExtraHotkeys.Mod.Hotkey.ToolModesRoads]": "道路工具模式",
+  "Options.GROUP[KSExtraHotkeys.Mod.Hotkey.ToolModesZones]": "功能區工具模式",
   "Options.GROUP[KSExtraHotkeys.Mod.Hotkey.Snapping options]": "對齊選項",
   "Options.GROUP[KSExtraHotkeys.Mod.Hotkey.General]": "常規",
   "Options.GROUP[KSExtraHotkeys.Mod.Hotkey.Tool related]": "筆刷",
@@ -79,5 +79,9 @@
   "Options.OPTION[KSExtraHotkeys.Mod.Hotkey/ShowContourLinesKeyBinding/binding]": "顯示輪廓線條",
   "Options.OPTION_DESCRIPTION[KSExtraHotkeys.Mod.Hotkey.ModSettings.ShowContourLinesKeyBinding]": "設定顯示輪廓線條",
   "Options.OPTION[KSExtraHotkeys.Mod.Hotkey.ModSettings.ModVersion]": "模組由 Fenrir 製作, Kelvin 更新",
-  "Options.OPTION_DESCRIPTION[KSExtraHotkeys.Mod.Hotkey.ModSettings.ModVersion]": ""
+  "Options.OPTION_DESCRIPTION[KSExtraHotkeys.Mod.Hotkey.ModSettings.ModVersion]": "",
+  "Options.OPTION[KSExtraHotkeys.Mod.Hotkey.ModSettings.DiscordLink]": "Discord",
+  "Options.OPTION_DESCRIPTION[KSExtraHotkeys.Mod.Hotkey.ModSettings.DiscordLink]": "",
+  "Options.OPTION[KSExtraHotkeys.Mod.Hotkey.ModSettings.QQLink]": "[QQ] 之壹的天際線2聚眾窩點",
+  "Options.OPTION_DESCRIPTION[KSExtraHotkeys.Mod.Hotkey.ModSettings.QQLink]": ""
 }

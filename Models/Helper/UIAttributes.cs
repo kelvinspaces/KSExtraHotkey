@@ -22,10 +22,6 @@ namespace Mod.Models.Ui;
             : base(defaultKey, actionName, alt, ctrl, shift)
         {
             this.icon = icon;
-
-            Hotkey.Logger.Info(icon + " " + defaultKey + " " + actionName);
         }
-
-        
     }
 }

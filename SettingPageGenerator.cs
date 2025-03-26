@@ -13,22 +13,16 @@ namespace Mod
 {
     public partial class ModSettings
     {
-
-        /// <summary>
-        /// Custom mod settings page generator
-        /// </summary>
-        /// <param name="pageId"></param>
-        /// <param name="addPrefix"></param>
-        /// <returns></returns>
         private AutomaticSettings.SettingPageData GeneratePage(string pageId, bool addPrefix)
         {
-            /* Vanilla start */
+            #region Vanilla Init
+
             ClearButtonGroups();
             Setting setting = this;
             AutomaticSettings.SettingPageData pageData = new AutomaticSettings.SettingPageData(pageId, addPrefix);
             var parameters = new object[]
             {
-                setting, false, null
+                   setting, false, null
             };
             if (MethodReturnsTrue(typeof(AutomaticSettings), "IsShowGroupName", BindingFlags.Static | BindingFlags.NonPublic, null, parameters))
             {
@@ -49,14 +43,20 @@ namespace Mod
 
             FillTabs(setting, pageData);
             FillGroups(setting, pageData);
-            /* Vanilla stop */
 
-            /* Custom code */
+            #endregion
+
+            #region Custom
+
             FillSections(setting, pageData);
 
-            // Vanilla
+            #endregion
+
+            #region Vanilla
             ClearButtonGroups();
             return pageData;
+            #endregion
+
         }
 
         private static void FillTabs(Setting setting, AutomaticSettings.SettingPageData pageData)
@@ -95,16 +95,12 @@ namespace Mod
             }
         }
 
-        /// <summary>
-        /// Extended settings page section generator
-        /// </summary>
-        /// <param name="setting"></param>
-        /// <param name="pageData"></param>
         private void FillSections(Game.Settings.Setting setting, AutomaticSettings.SettingPageData pageData)
         {
             foreach (PropertyInfo propInfo in setting.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public))
             {
-                /* Vanilla start */
+                #region Vanilla
+
                 AutomaticSettings.ProxyProperty property = new AutomaticSettings.ProxyProperty(propInfo);
                 AutomaticSettings.WidgetType widgetType = AutomaticSettings.GetWidgetType(property);
 
@@ -114,7 +110,7 @@ namespace Mod
                     continue;
                 }
 
-                /* Vanilla stop */
+                #endregion
 
                 CustomWidgetType customWidgetType = GetCustomWidgetType(property);
 
@@ -125,16 +121,23 @@ namespace Mod
                         AutomaticSettings.SettingItemData settingItemData;
                         if (customWidgetType != CustomWidgetType.None)
                         {
-                            // Customized
+                            #region Custom Logic
+
                             settingItemData = GetSettingsItemData(customWidgetType, setting, property, pageData.prefix);
+
+                            #endregion
                         }
                         else
                         {
-                            // Vanilla logic
+                            #region Vanilla Logic
+
                             settingItemData = widgetType != AutomaticSettings.WidgetType.MultilineText
                                 ? new AutomaticSettings.SettingItemData(widgetType, setting, property, pageData.prefix)
                                 : new MultilineTextSettingItemData(setting, property, pageData.prefix);
+
+                            #endregion
                         }
+
                         // Vanilla logic
                         settingItemData.simpleGroup = sectionInfo.simpleGroup;
                         settingItemData.advancedGroup = sectionInfo.advancedGroup;
@@ -142,13 +145,12 @@ namespace Mod
                         pageData.AddGroup(settingItemData.simpleGroup);
                         pageData.AddGroup(settingItemData.advancedGroup);
                     }
+
+                    Hotkey.Logger.Info("KSHotKey Init.");
                 }
             }
         }
 
-        /// <summary>
-        /// Vanilla cleaner for internal button group cache
-        /// </summary>
         private void ClearButtonGroups()
         {
             if ((typeof(AutomaticSettings).GetField("s_ButtonGroups", BindingFlags.Static | BindingFlags.NonPublic)?.GetValue(null) is ICollection<KeyValuePair<string, ButtonRow>> buttonGroups))
@@ -163,11 +165,6 @@ namespace Mod
             return value.HasValue && value.Value;
         }
 
-        /// <summary>
-        /// Vanilla warning getter builder (displays triangle icon on the mod settings page tab)
-        /// </summary>
-        /// <param name="setting"></param>
-        /// <returns></returns>
         private static Func<bool> GetWarningGetter(Game.Settings.Setting setting)
         {
             SettingsUIPageWarningAttribute attribute = ReflectionUtils.GetAttribute<SettingsUIPageWarningAttribute>(setting.GetType().GetCustomAttributes(inherit: false));
@@ -178,12 +175,6 @@ namespace Mod
             return null;
         }
 
-
-        /// <summary>
-        /// Vanilla tab warning icon getters (displays triangle icon in the tab)
-        /// </summary>
-        /// <param name="setting"></param>
-        /// <returns></returns>
         private static Dictionary<string, Func<bool>> GetTabWarningGetters(Game.Settings.Setting setting)
         {
             Dictionary<string, Func<bool>> dictionary = new Dictionary<string, Func<bool>>();
@@ -200,11 +191,6 @@ namespace Mod
             return dictionary;
         }
 
-        /// <summary>
-        /// Vanilla Section builder
-        /// </summary>
-        /// <param name="property"></param>
-        /// <returns></returns>
         private Dictionary<string, SectionInfo> BuildSections(AutomaticSettings.IProxyProperty property)
         {
             Dictionary<string, SectionInfo> sections = new Dictionary<string, SectionInfo>();
@@ -249,14 +235,6 @@ namespace Mod
             return iconAttribute != null ? CustomWidgetType.KeybindWithIcon : CustomWidgetType.None;
         }
 
-        /// <summary>
-        /// SettingsItemData generator based on widget type
-        /// </summary>
-        /// <param name="widgetType"></param>
-        /// <param name="setting"></param>
-        /// <param name="property"></param>
-        /// <param name="prefix"></param>
-        /// <returns></returns>
         private static AutomaticSettings.SettingItemData GetSettingsItemData(
             CustomWidgetType widgetType,
             Game.Settings.Setting setting,
@@ -267,9 +245,6 @@ namespace Mod
             return new SettingItemDataTypes.ExtendedKeybindingSettingItemData(iconAttribute?.icon ?? string.Empty, setting, property, prefix);
         }
 
-        /// <summary>
-        /// Helper structure for building settings page sections
-        /// </summary>
         private struct SectionInfo
         {
             public string tab;

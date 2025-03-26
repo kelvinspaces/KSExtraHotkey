@@ -8,7 +8,7 @@ const register: ModRegistrar = (moduleRegistry) => {
     // Vanilla OptionsUI component renderers ({"C# type": React widget renderer hook})
     const widgetComponents: Record<string, (data: Widget<any>) => ReactElement> = moduleRegistry.get("game-ui/menu/widgets/option-widget-renderer.tsx", "optionsWidgetComponents");
     // Add custom renderer for matching C# widget type
-    widgetComponents['Mod.CustomOptionUIWidgets.Widgets+ExtendedKeybindingField'] = ExtendedKeybinding;
+    widgetComponents['Mod.CustomOptionUIWidgets.Widgets+ExtendedKeybindingField']   = ExtendedKeybinding;
 }
 
 export default register;

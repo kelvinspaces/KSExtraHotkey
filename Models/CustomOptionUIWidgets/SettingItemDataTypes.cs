@@ -4,9 +4,6 @@ using Game.UI.Widgets;
 namespace Mod.CustomOptionUIWidgets;
 public static class SettingItemDataTypes
 {
-    /// <summary>
-    /// Setting item data representing Extended Keybinding field on the settings page
-    /// </summary>
     public class ExtendedKeybindingSettingItemData : AutomaticSettings.SettingItemData
     {
         private readonly string m_Icon;

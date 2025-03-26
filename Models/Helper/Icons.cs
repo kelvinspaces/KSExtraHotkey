@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using Colossal.UI;
-using Game.Objects;
-using Game.Prefabs;
-using Mod;
 
-namespace Mod.Models.Extension;
+namespace Mod.Models.Helper;
 
 public static class Icons
 {
