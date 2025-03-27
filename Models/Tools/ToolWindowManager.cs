@@ -2,11 +2,13 @@
 using Game.Input;
 using Game.Prefabs;
 using System.Collections.Generic;
-using Mod.Input;
-using Unity.Collections;
 using Unity.Entities;
+using KSExtraHotkey;
+using KSExtraHotkey.Settings;
+using KSExtraHotkey.Input;
+using Unity.Collections;
 
-namespace Mod.Models.Tools;
+namespace KSExtraHotkey.Models.Tools;
 
 public class ToolWindowManager
 {

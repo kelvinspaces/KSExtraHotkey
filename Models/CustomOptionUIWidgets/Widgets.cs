@@ -6,7 +6,7 @@ using Game.Reflection;
 using Game.UI.Menu;
 using Game.UI.Widgets;
 
-namespace Mod.CustomOptionUIWidgets;
+namespace KSExtraHotkey.CustomOptionUIWidgets;
 public static class Widgets
 {
     public class ExtendedKeybindingField : InputBindingField

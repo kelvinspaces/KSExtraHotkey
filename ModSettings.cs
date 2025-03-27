@@ -6,12 +6,12 @@ using Game.UI.Menu;
 using System.Linq;
 using System;
 using System.Reflection;
-using Mod.Models.Ui;
-using Mod.Constants;
+using KSExtraHotkey.Models.Ui;
+using KSExtraHotkey.Constants;
 
-namespace Mod
+namespace KSExtraHotkey.Settings
 {
-    [FileLocation("KSExtraHotkey")]
+    [FileLocation("KSExtraHotkey.coc")]
     [SettingsUIGroupOrder(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZonesToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
     [SettingsUIShowGroupName(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZonesToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
 
@@ -34,6 +34,12 @@ namespace Mod
         public const string gGeneral                    = "General";
         public const string gToolRelated                = "ToolRelated";
         public const string gAbout                      = "About";
+
+        #endregion
+
+        #region Hidden Settings
+
+        
 
         #endregion
 

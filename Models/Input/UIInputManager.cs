@@ -1,9 +1,10 @@
 ﻿using Game;
 using Game.Input;
 using System;
+using KSExtraHotkey.Settings;
 using UnityEngine.InputSystem;
 
-namespace Mod.Input;
+namespace KSExtraHotkey.Input;
 
 public class UIInputManager
 {

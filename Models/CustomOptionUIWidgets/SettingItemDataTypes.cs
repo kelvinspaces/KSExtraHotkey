@@ -1,7 +1,7 @@
 ﻿using Game.UI.Menu;
 using Game.UI.Widgets;
 
-namespace Mod.CustomOptionUIWidgets;
+namespace KSExtraHotkey.CustomOptionUIWidgets;
 public static class SettingItemDataTypes
 {
     public class ExtendedKeybindingSettingItemData : AutomaticSettings.SettingItemData

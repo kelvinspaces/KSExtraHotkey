@@ -1,9 +1,10 @@
 ﻿using Game.Tools;
-using Mod;
-using Mod.Input;
-using Mod.Models.Tools;
+using KSExtraHotkey.Settings;
+using KSExtraHotkey;
+using KSExtraHotkey.Input;
+using KSExtraHotkey.Models.Tools;
 
-namespace Mod.Models.Tools;
+namespace KSExtraHotkey.Models.Tools;
 
 public class ScrollActionManager
 {

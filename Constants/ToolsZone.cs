@@ -1,4 +1,4 @@
-﻿namespace Mod.Constants;
+﻿namespace KSExtraHotkey.Constants;
 
 public static class ZoneToolActions
 {

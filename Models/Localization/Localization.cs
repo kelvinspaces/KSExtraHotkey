@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using Colossal.IO.AssetDatabase;
 
-namespace Mod.Models.Localization;
+namespace KSExtraHotkey.Models.Localization;
 
 public class Localization
 {

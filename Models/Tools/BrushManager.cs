@@ -2,9 +2,10 @@
 using Game.SceneFlow;
 using Game.Tools;
 using System;
-using Mod.Input;
+using KSExtraHotkey.Settings;
+using KSExtraHotkey.Input;
 
-namespace Mod.Models.Tools;
+namespace KSExtraHotkey.Models.Tools;
 
 public class BrushManager
 {

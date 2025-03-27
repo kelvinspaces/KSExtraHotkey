@@ -3,10 +3,11 @@ using Game.Input;
 using Game.Tools;
 using System;
 using System.Collections.Generic;
-using Mod;
-using Mod.Input;
+using KSExtraHotkey.Settings;
+using KSExtraHotkey;
+using KSExtraHotkey.Input;
 
-namespace Mod.Models.Tools;
+namespace KSExtraHotkey.Models.Tools;
 
 public class ToolModeManager
 {

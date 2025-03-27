@@ -6,10 +6,12 @@ using Game.Tools;
 using Game.UI;
 using Game.UI.InGame;
 using System;
-using Mod.Input;
-using Mod.Models.Tools;
+using KSExtraHotkey;
+using KSExtraHotkey.Settings;
+using KSExtraHotkey.Input;
+using KSExtraHotkey.Models.Tools;
 
-namespace Mod.UiSystem;
+namespace KSExtraHotkey.UiSystem;
 
 public partial class UISystem : UISystemBase
 {
@@ -17,13 +19,11 @@ public partial class UISystem : UISystemBase
     private ModSettings ModSettings => Hotkey.ModSettings;
 
     private PrefabSystem m_prefabSystem;
-    private ToolBaseSystem m_ToolBaseSystem;
     private ToolSystem m_toolSystem;
     private NetToolSystem m_netToolSystem;
     private ZoneToolSystem m_zoneToolSystem;
     private TerrainToolSystem m_terrainToolSystem;
     private ObjectToolSystem m_objectToolSystem;
-    private GameScreenUISystem m_gameScreenUISystem;
 
     private UIInputManager _uiInputManager;
     private ToolWindowManager _toolWindowManager;
@@ -80,13 +80,11 @@ public partial class UISystem : UISystemBase
         _uiView = GameManager.instance.userInterface.view.View;
 
         m_prefabSystem = World.GetOrCreateSystemManaged<PrefabSystem>();
-        m_ToolBaseSystem = World.GetOrCreateSystemManaged<ToolBaseSystem>();
         m_toolSystem = World.GetOrCreateSystemManaged<ToolSystem>();
         m_netToolSystem = World.GetOrCreateSystemManaged<NetToolSystem>();
         m_zoneToolSystem = World.GetOrCreateSystemManaged<ZoneToolSystem>();
         m_terrainToolSystem = World.GetOrCreateSystemManaged<TerrainToolSystem>();
         m_objectToolSystem = World.GetOrCreateSystemManaged<ObjectToolSystem>();
-        m_gameScreenUISystem = World.GetOrCreateSystemManaged<GameScreenUISystem>();
 
         _uiInputManager = new UIInputManager(
             inputManager,

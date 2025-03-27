@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using Colossal.Reflection;
-using Mod.CustomOptionUIWidgets;
+using KSExtraHotkey.CustomOptionUIWidgets;
 using Game.Settings;
 using Game.UI.Menu;
 using Game.UI.Widgets;
-using Mod.Models.Ui;
+using KSExtraHotkey;
+using KSExtraHotkey.Models.Ui;
 
-namespace Mod
+namespace KSExtraHotkey.Settings
 {
     public partial class ModSettings
     {

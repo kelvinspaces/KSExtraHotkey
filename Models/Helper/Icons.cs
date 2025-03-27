@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Colossal.UI;
 
-namespace Mod.Models.Helper;
+namespace KSExtraHotkey.Models.Helper;
 
 public static class Icons
 {

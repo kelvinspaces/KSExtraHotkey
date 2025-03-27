@@ -1,10 +1,11 @@
 ﻿using cohtml.Net;
 using Game.SceneFlow;
 using Game.Tools;
-using Mod.Input;
+using KSExtraHotkey.Input;
 using System;
+using KSExtraHotkey.Settings;
 
-namespace Mod.Models.Tools;
+namespace KSExtraHotkey.Models.Tools;
 
 public class ElevationManager(ModSettings modSettings, UIInputManager uiInputManager, NetToolSystem netToolSystem)
 {

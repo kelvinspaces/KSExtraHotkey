@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 
-namespace Mod.Debugger;
+namespace KSExtraHotkey.Debugger;
 
 public class Logger(ILog log, bool debugMod = false)
 {

@@ -1,9 +1,9 @@
 ﻿using System;
 using Game.Input;
 using Game.Settings;
-using Mod.Models.Tools;
+using KSExtraHotkey.Models.Tools;
 
-namespace Mod.Models.Ui;
+namespace KSExtraHotkey.Models.Ui;
 
     public static class UIAttributes
 {
