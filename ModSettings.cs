@@ -11,7 +11,7 @@ using Mod.Constants;
 
 namespace Mod
 {
-    [FileLocation(nameof(Mod))]
+    [FileLocation("KSExtraHotkey")]
     [SettingsUIGroupOrder(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZonesToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
     [SettingsUIShowGroupName(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZonesToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
 

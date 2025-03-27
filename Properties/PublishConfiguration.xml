@@ -65,14 +65,11 @@ Take your Cities: Skylines 2 experience to the next level with ExtraHotkeys! ðŸš
 	<Screenshot Value="Properties/screenshot-3.png" />
 	<Screenshot Value="Properties/screenshot-4.png" />
 	<Tag Value="Code Mod" />
-	<ModVersion Value="2.1.0" />
+	<ModVersion Value="2.1.1" />
 	<GameVersion Value="1.2.*" />
 	<ChangeLog>
-# 2.1.0
-- Added custom ui setting page
-- Added icon for easy recognize.
-- Added all localization.
-- Added brush size from 1 to 50k.
+# 2.1.1
+- Fixed setting file conflict crash.
 	</ChangeLog>
 	<ExternalLink Type="github" Url="https://github.com/kelvinspaces/KSExtraHotkey" />
 	<ExternalLink Type="discord" Url="https://discord.com/channels/1024242828114673724/1219598270406594660/1219598270406594660" />
