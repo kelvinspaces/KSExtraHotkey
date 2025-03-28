@@ -11,6 +11,7 @@ using KSExtraHotkey.Settings;
 using KSExtraHotkey.Models.Helper;
 using KSExtraHotkey.Models.Localization;
 using Colossal.PSI.Common;
+using KSExtraHotkey.Constants;
 
 namespace KSExtraHotkey;
 
@@ -41,7 +42,7 @@ public class Hotkey : IMod
     ModSettings = new ModSettings(this);
     ModSettings.RegisterInOptionsUI();
     ModSettings.RegisterKeyBindings();
-    AssetDatabase.global.LoadSettings(nameof(Mod), ModSettings, new ModSettings(this));
+    AssetDatabase.global.LoadSettings(Global.Base, ModSettings, new ModSettings(this));
     ModSettings.ApplyAndSave();
 
     updateSystem.UpdateAt<UISystem>(SystemUpdatePhase.UIUpdate);

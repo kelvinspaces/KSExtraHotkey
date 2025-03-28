@@ -126,6 +126,8 @@ namespace KSExtraHotkey.Settings
 
                             settingItemData = GetSettingsItemData(customWidgetType, setting, property, pageData.prefix);
 
+                            Hotkey.Logger.Info("KSHotKey Init " + property);
+
                             #endregion
                         }
                         else
@@ -146,8 +148,6 @@ namespace KSExtraHotkey.Settings
                         pageData.AddGroup(settingItemData.simpleGroup);
                         pageData.AddGroup(settingItemData.advancedGroup);
                     }
-
-                    Hotkey.Logger.Info("KSHotKey Init.");
                 }
             }
         }

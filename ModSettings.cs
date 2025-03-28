@@ -11,7 +11,7 @@ using KSExtraHotkey.Constants;
 
 namespace KSExtraHotkey.Settings
 {
-    [FileLocation("KSExtraHotkey.coc")]
+    [FileLocation(Global.Settings)]
     [SettingsUIGroupOrder(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZonesToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
     [SettingsUIShowGroupName(gOpenToolsKeybindings, gRoadToolModeKeybindings, gZonesToolModeKeybindings, gSnappingKeybindings, gGeneral, gToolRelated, gAbout)]
 
