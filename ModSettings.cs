@@ -173,20 +173,6 @@ namespace KSExtraHotkey.Settings
         [SettingsUISection(sGeneral, gAbout)]
         public string ModVersion => $"V{Assembly.GetExecutingAssembly().GetName().Version.ToString(3)}";
 
-        [SettingsUISection(sGeneral, gAbout)]
-        [SettingsUIButton]
-        public bool DiscordLink
-        {
-            set => OpenDiscord();
-        }
-
-        [SettingsUISection(sGeneral, gAbout)]
-        [SettingsUIButton]
-        public bool QQLink
-        {
-            set => OpenQQ();
-        }
-
         #endregion
 
         #region Methods
@@ -218,32 +204,6 @@ namespace KSExtraHotkey.Settings
             catch (Exception ex)
             {
                 Hotkey.Logger.Error(ex.Message);
-            }
-        }
-
-        public void OpenDiscord()
-        {
-            try
-            {
-                string discordInviteLink = "https://discord.com/channels/1024242828114673724/1352829725617426514";
-                System.Diagnostics.Process.Start(discordInviteLink);
-            }
-            catch (Exception ex)
-            {
-                Hotkey.Logger.Info("An error occurred: " + ex.Message);
-            }
-        }
-
-        public void OpenQQ()
-        {
-            try
-            {
-                string qqInviteLink = "https://qm.qq.com/q/JYBKZg9NYs";
-                System.Diagnostics.Process.Start(qqInviteLink);
-            }
-            catch (Exception ex)
-            {
-                Hotkey.Logger.Info("An error occurred: " + ex.Message);
             }
         }
 
